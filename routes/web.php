@@ -43,3 +43,6 @@ Route::middleware('auth','role:admin')->group(function () {
 Route::middleware('auth','role:vendor')->group(function () {
     Route::get('/vendor/dashboard', [VendorController::class, 'dashboard'])->name('vendor.dashboard');
 });
+
+////Creamos una ruta unica para el administrador que sea publica
+Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
