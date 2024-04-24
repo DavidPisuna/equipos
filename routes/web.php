@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\VendorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +31,15 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+////Creamos la ruta
+///aqui protegemos la ruta si no es administrador no refleja
+
+Route::middleware('auth','role:admin')->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+
+Route::middleware('auth','role:vendor')->group(function () {
+    Route::get('/vendor/dashboard', [VendorController::class, 'dashboard'])->name('vendor.dashboard');
+});
