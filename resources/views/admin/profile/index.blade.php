@@ -43,6 +43,54 @@
             </form>
           </div>
         </div>
+
+
+        <div class="col-12 col-md-12 col-lg-7">
+            <div class="card">
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error )
+                        <span class="alert alert-danger">{{ $error}}</span>
+                    @endforeach
+                @endif
+
+                @if (session('repeatPassword'))
+                   <div class="alert alert-danger" role="alert">
+                        {{ session('repeatPassword')}}
+                   </div>
+                @endif
+
+                @if (session('notification'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('notification')}}
+                    </div>
+                @endif
+
+              <form method="post" class="needs-validation" novalidate="" action="{{ route('admin.password.update')}}" enctype="multipart/form-data">
+                  @csrf
+
+                <div class="card-body">
+                    <div class="row">
+                       <div class="form-group col-12">
+                            <label>Contraseña</label>
+                            <input type="password" class="form-control" name="current_password">
+                        </div>
+                        <div class="form-group col-md-6 col-12">
+                            <label>Nueva Contraseña</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <div class="form-group col-md-6 col-12">
+                            <label>Confirmar Contraseña</label>
+                            <input type="password" class="form-control" name="password_confirmation">
+                        </div>
+
+                    </div>
+              </div>
+                <div class="card-footer text-right">
+                  <button class="btn btn-primary">Cambiar Contraseña</button>
+                </div>
+              </form>
+            </div>
+          </div>
       </div>
     </div>
 </section>
